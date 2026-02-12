@@ -41,6 +41,10 @@ def run_posthoc(model, X_train, A_train, y_train, X_test, A_test, y_test,
     with torch.no_grad():
         model.eval()
         H_train = model.extract_features(X_train).detach()
+    
+    A_train = A_train.to(device=H_train.device, dtype=torch.long)
+    y_train = y_train.to(H_train.device)
+
 
     # still meaningful if true groups are known (n_classes=10)
     true_group_labels = np.array([0]*5 + [1]*5) if int(args.n_classes) == 10 else None
@@ -117,6 +121,10 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
         with torch.no_grad():
             model.eval()
             H_train = model.extract_features(X_train).detach()
+        
+        A_train = A_train.to(device=H_train.device, dtype=torch.long)
+        y_train = y_train.to(H_train.device)
+
 
         all_Z, metrics, Z_final, U_final = run_admm_path(
             model=model,
@@ -154,7 +162,10 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
             Z_star_np = all_Z[-1]
             log_fn("[Alt] pick Z* from last lambda (no ARI available)")
 
-        Z_star = torch.tensor(Z_star_np, device=X_train.device, dtype=model.output_layer.weight.dtype)
+        # Z_star = torch.tensor(Z_star_np, device=X_train.device, dtype=model.output_layer.weight.dtype)
+        device = model.output_layer.weight.device
+        Z_star = torch.tensor(Z_star_np, device=device, dtype=model.output_layer.weight.dtype)
+
 
         # unfreeze backbone for finetune
         for p in model.parameters():
@@ -187,4 +198,5 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
         })
 
     return all_cycles
+
 
