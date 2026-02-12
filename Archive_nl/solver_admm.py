@@ -27,6 +27,10 @@ def _treatment_indexed_mse(mu_all: torch.Tensor, A: torch.Tensor, y: torch.Tenso
     y:      [n]    float continuous outcome
     return: scalar MSE between mu_all[i, A_i] and y_i
     """
+    device = mu_all.device
+    A = A.to(device=device, dtype=torch.long)
+    y = y.to(device)
+
     mu_a = mu_all.gather(1, A.view(-1, 1)).squeeze(1)  # [n]
     return F.mse_loss(mu_a, y)
 
@@ -195,4 +199,5 @@ def run_admm_path(
             log_fn(f"[Save] U_last -> {ulast_file}")
 
     return all_Z, metrics, Z.detach(), U.detach()
+
 
