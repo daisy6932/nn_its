@@ -3,17 +3,17 @@ import torch
 import torch.nn.functional as F
 
 def _eval_mse(model, X, A, y):
-    """
-    Evaluate MSE on (X, A, y):
-      model(X) -> [n, M] predicted means for each treatment
-      pick the A-th column for each sample -> [n]
-      compute MSE with continuous y -> scalar
-    """
     model.eval()
+    device = next(model.parameters()).device
+    X = X.to(device)
+    A = A.to(device=device, dtype=torch.long)
+    y = y.to(device)
+
     with torch.no_grad():
         mu = model(X)  # [n, M]
         mu_a = mu.gather(1, A.view(-1, 1)).squeeze(1)  # [n]
         return float(F.mse_loss(mu_a, y).item())
+
 
 def train_supervised(
     model,
@@ -35,6 +35,18 @@ def train_supervised(
     where beta is output_layer.weight (shape [M, hidden2]).
     """
     opt = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=wd)
+    
+    device = next(model.parameters()).device
+    X_train = X_train.to(device)
+    A_train = A_train.to(device=device, dtype=torch.long)
+    y_train = y_train.to(device)
+
+    X_val = X_val.to(device)
+    A_val = A_val.to(device=device, dtype=torch.long)
+    y_val = y_val.to(device)
+
+    if tether_Z is not None:
+        tether_Z = tether_Z.to(device)
 
     best = float("inf")
     best_state = None
@@ -72,4 +84,5 @@ def train_supervised(
     if best_state is not None:
         model.load_state_dict(best_state)
     return best
+
 
