@@ -1,4 +1,4 @@
-# Archive_new/run_scaf_server.py
+# Archive_nl/run_scaf_server.py
 import os
 import json
 import time
@@ -45,12 +45,13 @@ def save_cycle_artifacts(outdir, cycle_id, lambda_values, cycle_pack, args, log_
     save_path_metrics_csv(metrics, metrics_file)
     log_fn(f"[Save] metrics -> {metrics_file}")
 
-    # 3) 保存 dendrogram（可选：我建议每个 cycle 都存）
+    # 3) 保存 dendrogram（optional: 建议每个 cycle 都存）
     dendro_file = os.path.join(outdir, f"dendrogram_cycle{cycle_id}.png")
     dendro = plot_scaf_dendrogram(
         lambda_values=lambda_values,
         all_Z_list=Z_list,
-        round_decimals=int(args.round_decimals),
+        # round_decimals=int(args.round_decimals),
+        round_decimals=int(getattr(args, "round_decimals", 3)),
         title=f"SCAF Path cycle{cycle_id} ({args.penalty}, rho={args.rho}, gamma={args.gamma_mcp}, a={args.a_scad})",
         save_path=dendro_file
     )
@@ -61,6 +62,9 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     add_args(parser)
+    # add 3.0
+    parser.add_argument("--round_decimals", type=int, default=3)
+    #
     args = parser.parse_args()
 
     outdir = os.path.join(args.out_base, args.run_name)
@@ -149,4 +153,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
