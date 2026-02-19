@@ -1,0 +1,50 @@
+[Run] outdir = outputs/alt_cpu_test1
+--- Using device: cpu ---
+Lambda values (len=30): [0.00000000e+00 1.00000000e-04 1.59784498e-04 2.55310859e-04
+ 4.07947174e-04 6.51836345e-04 1.04153343e-03 1.66420897e-03
+ 2.65914795e-03 4.24890620e-03 6.78909346e-03 1.08479189e-02
+ 1.73332928e-02 2.76959149e-02 4.42537786e-02 7.07106781e-02
+ 1.12984702e-01 1.80532039e-01 2.88462213e-01 4.60917900e-01
+ 7.36475353e-01 1.17677345e+00 1.88030155e+00 3.00443039e+00
+ 4.80061402e+00 7.67063702e+00 1.22564889e+01 1.95839692e+01
+ 3.12921470e+01 5.00000000e+01]
+--- [Stage 1] Pretrain NN (regression) ---
+[Train] it=  100 | val_mse=0.901151
+[Train] it=  200 | val_mse=0.814803
+
+=== [Alt Cycle 1/1] ADMM ===
+[ADMM]   1/30 λ= 0.0000 | C2=10 C3=10 | minLinf=3.62e-01 | T=  0.56s | ARI=0.0000
+[ADMM]   2/30 λ= 0.0001 | C2=10 C3=10 | minLinf=3.79e-01 | T=  0.56s | ARI=0.0000
+[ADMM]   3/30 λ= 0.0002 | C2=10 C3=10 | minLinf=3.89e-01 | T=  0.57s | ARI=0.0000
+[ADMM]   4/30 λ= 0.0003 | C2=10 C3=10 | minLinf=3.96e-01 | T=  0.56s | ARI=0.0000
+[ADMM]   5/30 λ= 0.0004 | C2=10 C3=10 | minLinf=4.02e-01 | T=  0.58s | ARI=0.0000
+[ADMM]   6/30 λ= 0.0007 | C2=10 C3=10 | minLinf=4.07e-01 | T=  0.55s | ARI=0.0000
+[ADMM]   7/30 λ= 0.0010 | C2=10 C3=10 | minLinf=4.11e-01 | T=  0.60s | ARI=0.0000
+[ADMM]   8/30 λ= 0.0017 | C2=10 C3=10 | minLinf=4.14e-01 | T=  0.70s | ARI=0.0000
+[ADMM]   9/30 λ= 0.0027 | C2=10 C3=10 | minLinf=4.17e-01 | T=  0.72s | ARI=0.0000
+[ADMM]  10/30 λ= 0.0042 | C2=10 C3=10 | minLinf=4.19e-01 | T=  1.10s | ARI=0.0000
+[ADMM]  11/30 λ= 0.0068 | C2=10 C3=10 | minLinf=4.21e-01 | T=  1.37s | ARI=0.0000
+[ADMM]  12/30 λ= 0.0108 | C2=10 C3=10 | minLinf=4.23e-01 | T=  1.30s | ARI=0.0000
+[ADMM]  13/30 λ= 0.0173 | C2=10 C3=10 | minLinf=4.25e-01 | T=  1.45s | ARI=0.0000
+[ADMM]  14/30 λ= 0.0277 | C2=10 C3=10 | minLinf=4.30e-01 | T=  1.99s | ARI=0.0000
+[ADMM]  15/30 λ= 0.0443 | C2=10 C3=10 | minLinf=4.18e-01 | T=  2.17s | ARI=0.0000
+[ADMM]  16/30 λ= 0.0707 | C2=10 C3=10 | minLinf=4.28e-01 | T=  2.34s | ARI=0.0000
+[ADMM]  17/30 λ= 0.1130 | C2=10 C3=10 | minLinf=4.04e-01 | T=  2.34s | ARI=0.0000
+[ADMM]  18/30 λ= 0.1805 | C2=10 C3=10 | minLinf=4.59e-01 | T=  2.34s | ARI=0.0000
+[ADMM]  19/30 λ= 0.2885 | C2=10 C3=10 | minLinf=5.47e-03 | T=  2.33s | ARI=0.0000
+[ADMM]  20/30 λ= 0.4609 | C2=10 C3=10 | minLinf=3.01e-03 | T=  2.34s | ARI=0.0000
+[ADMM]  21/30 λ= 0.7365 | C2= 7 C3=10 | minLinf=1.07e-03 | T=  2.33s | ARI=0.0000
+[ADMM]  22/30 λ= 1.1768 | C2= 7 C3=10 | minLinf=1.06e-03 | T=  2.33s | ARI=0.0000
+[ADMM]  23/30 λ= 1.8803 | C2= 7 C3=10 | minLinf=1.18e-03 | T=  2.34s | ARI=0.0000
+[ADMM]  24/30 λ= 3.0044 | C2=10 C3=10 | minLinf=1.18e-03 | T=  2.34s | ARI=0.0000
+[ADMM]  25/30 λ= 4.8006 | C2= 7 C3=10 | minLinf=1.68e-03 | T=  2.34s | ARI=0.0000
+[ADMM]  26/30 λ= 7.6706 | C2= 9 C3=10 | minLinf=1.82e-03 | T=  2.34s | ARI=0.0000
+[ADMM]  27/30 λ=12.2565 | C2= 6 C3= 8 | minLinf=0.00e+00 | T=  2.33s | ARI=-0.0328
+[ADMM]  28/30 λ=19.5840 | C2= 8 C3=10 | minLinf=1.16e-03 | T=  2.34s | ARI=0.0000
+[ADMM]  29/30 λ=31.2921 | C2= 9 C3=10 | minLinf=1.25e-03 | T=  2.33s | ARI=0.0000
+[ADMM]  30/30 λ=50.0000 | C2= 6 C3= 8 | minLinf=0.00e+00 | T=  2.34s | ARI=0.1099
+[Alt] pick Z* from lambda idx=29 (ARI=0.1099)
+=== [Alt Cycle 1] Finetune NN with tether mu=1.0 ===
+[Train] it=  100 | val_mse=0.844652
+[Save] Z path -> outputs/alt_cpu_test1/Z_path_cycle1.npy | shape=(30, 10, 16)
+[Save] metrics -> outputs/alt_cpu_test1/path_metrics_cycle1.csv
