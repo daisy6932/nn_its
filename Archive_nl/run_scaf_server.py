@@ -47,15 +47,29 @@ def save_cycle_artifacts(outdir, cycle_id, lambda_values, cycle_pack, args, log_
 
     # 3) 保存 dendrogram（optional: 建议每个 cycle 都存）
     dendro_file = os.path.join(outdir, f"dendrogram_cycle{cycle_id}.png")
-    dendro = plot_scaf_dendrogram(
-        lambda_values=lambda_values,
-        all_Z_list=Z_list,
-        # round_decimals=int(args.round_decimals),
-        round_decimals=int(getattr(args, "round_decimals", 3)),
-        title=f"SCAF Path cycle{cycle_id} ({args.penalty}, rho={args.rho}, gamma={args.gamma_mcp}, a={args.a_scad})",
-        save_path=dendro_file
-    )
+    dendro = None
+    try:
+        dendro = plot_scaf_dendrogram(
+            lambda_values=lambda_values,
+            all_Z_list=Z_list,
+            round_decimals=int(getattr(args, "round_decimals", 3)),
+            title=f"SCAF Path cycle{cycle_id} ({args.penalty}, rho={args.rho}, gamma={args.gamma_mcp}, a={args.a_scad})",
+            save_path=dendro_file
+        )
+    except Exception as e:
+        log_fn(f"[Warn] dendrogram failed in cycle {cycle_id}: {repr(e)}")
+
     log_fn(f"[Save] dendrogram -> {dendro}")
+
+    #dendro = plot_scaf_dendrogram(
+    #    lambda_values=lambda_values,
+    #    all_Z_list=Z_list,
+        # round_decimals=int(args.round_decimals),
+    #    round_decimals=int(getattr(args, "round_decimals", 3)),
+    #    title=f"SCAF Path cycle{cycle_id} ({args.penalty}, rho={args.rho}, gamma={args.gamma_mcp}, a={args.a_scad})",
+    #    save_path=dendro_file
+    #)
+    #log_fn(f"[Save] dendrogram -> {dendro}")
 
 
 def main():
@@ -153,5 +167,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
