@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/sw/pkgs/arc/python3.10-anaconda/2023.03/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/sw/pkgs/arc/python3.10-anaconda/2023.03/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/home/yxyuan/urps/nn_its/Archive_nl/run_scaf_server.py", line 155, in <module>
+    main()
+  File "/home/yxyuan/urps/nn_its/Archive_nl/run_scaf_server.py", line 147, in main
+    save_cycle_artifacts(outdir, cid, lambda_values, pack, args, log_fn)
+  File "/home/yxyuan/urps/nn_its/Archive_nl/run_scaf_server.py", line 50, in save_cycle_artifacts
+    dendro = plot_scaf_dendrogram(
+  File "/home/yxyuan/urps/nn_its/Archive_nl/plotting.py", line 80, in plot_scaf_dendrogram
+    sch.dendrogram(L, labels=np.arange(n_classes), leaf_rotation=0., leaf_font_size=10)
+  File "/sw/pkgs/arc/python3.10-anaconda/2023.03/lib/python3.10/site-packages/scipy/cluster/hierarchy.py", line 3305, in dendrogram
+    raise ValueError("Dimensions of Z and labels must be consistent.")
+ValueError: Dimensions of Z and labels must be consistent.
