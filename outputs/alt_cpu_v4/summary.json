@@ -1,0 +1,5 @@
+{
+  "mode": "alt",
+  "cycles": 4,
+  "outdir": "outputs/alt_cpu_v4"
+}
