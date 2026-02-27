@@ -34,18 +34,18 @@ def save_cycle_artifacts(outdir, cycle_id, lambda_values, cycle_pack, args, log_
     Z_list = cycle_pack["all_Z"]                  # list of (K,d)
     metrics = cycle_pack["admm_metrics"]
 
-    # 1) 保存 Z_path
+    # 1) save Z_path
     Z_path = np.stack(Z_list, axis=0).astype(np.float32)   # (L,K,d)
     zpath_file = os.path.join(outdir, f"Z_path_cycle{cycle_id}.npy")
     np.save(zpath_file, Z_path)
     log_fn(f"[Save] Z path -> {zpath_file} | shape={Z_path.shape}")
 
-    # 2) 保存 metrics
+    # 2) save metrics
     metrics_file = os.path.join(outdir, f"path_metrics_cycle{cycle_id}.csv")
     save_path_metrics_csv(metrics, metrics_file)
     log_fn(f"[Save] metrics -> {metrics_file}")
 
-    # 3) 保存 dendrogram（optional: 建议每个 cycle 都存）
+    # 3) save dendrogram（optional: suggest save every cycle）
     dendro_file = os.path.join(outdir, f"dendrogram_cycle{cycle_id}.png")
     dendro = None
     try:
@@ -76,6 +76,14 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     add_args(parser)
+    # add data_version 
+    parser.add_argument(
+        "--data_version",
+        type=int,
+        default=1,
+        help="Synthetic data version: 1=linear, 2=weak nonlinear, 3=moderate, 4=strong"
+    )
+    # add data_version end
     # add 3.0
     parser.add_argument("--round_decimals", type=int, default=3)
     #
@@ -85,6 +93,7 @@ def main():
     os.makedirs(outdir, exist_ok=True)
     log_fn, log_file = make_logger(os.path.join(outdir, "run.log"))
     log_fn(f"[Run] outdir = {outdir}")
+    log_fn(f"[Run] Data Version = {args.data_version}")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     log_fn(f"--- Using device: {device} ---")
@@ -94,12 +103,31 @@ def main():
         raise ValueError("Synthetic generator assumes n_classes=10.")
 
     true_groups = [list(range(0, 5)), list(range(5, 10))]
+    #X_train, A_train, y_train, _ = generate_synthetic_data(
+    #    args.n_train, args.n_features, args.n_classes, true_groups, args.seed_train
+    #)
+    # add data_version
     X_train, A_train, y_train, _ = generate_synthetic_data(
-        args.n_train, args.n_features, args.n_classes, true_groups, args.seed_train
+        args.n_train,
+        args.n_features,
+        args.n_classes,
+        true_groups,
+        args.seed_train,
+        version=args.data_version
     )
+
+    #X_test, A_test, y_test, _ = generate_synthetic_data(
+    #    args.n_test, args.n_features, args.n_classes, true_groups, args.seed_test
+    #)
     X_test, A_test, y_test, _ = generate_synthetic_data(
-        args.n_test, args.n_features, args.n_classes, true_groups, args.seed_test
+        args.n_test,
+        args.n_features,
+        args.n_classes,
+        true_groups,
+        args.seed_test,
+        version=args.data_version
     )
+
 
     X_train = X_train.to(device); A_train.to(device); y_train = y_train.to(device)
     X_test  = X_test.to(device); A_test = A_test.to(device);  y_test  = y_test.to(device)
@@ -167,6 +195,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
