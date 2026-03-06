@@ -1,0 +1,167 @@
+[Run] outdir = outputs/v2_weak_nl
+[Run] Data Version = 2
+[Run] round_decimals = 1
+--- Using device: cpu ---
+Lambda values (len=30): [0.00000000e+00 1.00000000e-04 1.51844592e-04 2.30567803e-04
+ 3.50104740e-04 5.31615116e-04 8.07228806e-04 1.22573329e-03
+ 1.86120972e-03 2.82614631e-03 4.29135035e-03 6.51618344e-03
+ 9.89447219e-03 1.50242210e-02 2.28134671e-02 3.46410162e-02
+ 5.26005098e-02 7.98710297e-02 1.21279840e-01 1.84156878e-01
+ 2.79632261e-01 4.24606467e-01 6.44741959e-01 9.79005800e-01
+ 1.48656737e+00 2.25727216e+00 3.42754571e+00 5.20454282e+00
+ 7.90281683e+00 1.20000000e+01]
+--- [Stage 1] Pretrain NN (regression) ---
+[Train] it=  100 | val_mse=0.436743
+[Train] it=  200 | val_mse=0.284482
+
+=== [Alt Cycle 1/4] ADMM ===
+[ADMM]   1/30 λ= 0.0000 | C@1d=10 | minLinf=1.65e-01 | T=  2.03s | ARI=0.0000
+[ADMM]   2/30 λ= 0.0001 | C@1d=10 | minLinf=1.59e-01 | T=  2.20s | ARI=0.0000
+[ADMM]   3/30 λ= 0.0002 | C@1d=10 | minLinf=1.54e-01 | T=  2.00s | ARI=0.0000
+[ADMM]   4/30 λ= 0.0002 | C@1d=10 | minLinf=1.49e-01 | T=  2.25s | ARI=0.0000
+[ADMM]   5/30 λ= 0.0004 | C@1d=10 | minLinf=1.44e-01 | T=  1.94s | ARI=0.0000
+[ADMM]   6/30 λ= 0.0005 | C@1d=10 | minLinf=1.39e-01 | T=  2.03s | ARI=0.0000
+[ADMM]   7/30 λ= 0.0008 | C@1d=10 | minLinf=1.40e-01 | T=  2.06s | ARI=0.0000
+[ADMM]   8/30 λ= 0.0012 | C@1d=10 | minLinf=1.42e-01 | T=  2.04s | ARI=0.0000
+[ADMM]   9/30 λ= 0.0019 | C@1d=10 | minLinf=1.44e-01 | T=  2.18s | ARI=0.0000
+[ADMM]  10/30 λ= 0.0028 | C@1d=10 | minLinf=1.43e-01 | T=  2.52s | ARI=0.0000
+[ADMM]  11/30 λ= 0.0043 | C@1d=10 | minLinf=1.46e-01 | T=  2.50s | ARI=0.0000
+[ADMM]  12/30 λ= 0.0065 | C@1d=10 | minLinf=1.48e-01 | T=  2.54s | ARI=0.0000
+[ADMM]  13/30 λ= 0.0099 | C@1d=10 | minLinf=1.52e-01 | T=  2.46s | ARI=0.0000
+[ADMM]  14/30 λ= 0.0150 | C@1d=10 | minLinf=1.56e-01 | T=  2.50s | ARI=0.0000
+[ADMM]  15/30 λ= 0.0228 | C@1d=10 | minLinf=1.54e-01 | T=  2.60s | ARI=0.0000
+[ADMM]  16/30 λ= 0.0346 | C@1d=10 | minLinf=1.61e-01 | T=  2.51s | ARI=0.0000
+[ADMM]  17/30 λ= 0.0526 | C@1d=10 | minLinf=1.87e-01 | T=  2.48s | ARI=0.0000
+[ADMM]  18/30 λ= 0.0799 | C@1d=10 | minLinf=1.89e-01 | T=  2.50s | ARI=0.0000
+[ADMM]  19/30 λ= 0.1213 | C@1d=10 | minLinf=1.17e-01 | T=  2.49s | ARI=0.0000
+[ADMM]  20/30 λ= 0.1842 | C@1d=10 | minLinf=7.07e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  21/30 λ= 0.2796 | C@1d=10 | minLinf=5.12e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  22/30 λ= 0.4246 | C@1d=10 | minLinf=4.46e-02 | T=  2.60s | ARI=0.0000
+[ADMM]  23/30 λ= 0.6447 | C@1d=10 | minLinf=2.48e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  24/30 λ= 0.9790 | C@1d= 9 | minLinf=1.26e-02 | T=  2.60s | ARI=0.0552
+[ADMM]  25/30 λ= 1.4866 | C@1d=10 | minLinf=3.11e-02 | T=  2.59s | ARI=0.0000
+[ADMM]  26/30 λ= 2.2573 | C@1d= 8 | minLinf=1.98e-02 | T=  2.53s | ARI=-0.0328
+[ADMM]  27/30 λ= 3.4275 | C@1d= 6 | minLinf=2.07e-02 | T=  2.47s | ARI=0.0757
+[ADMM]  28/30 λ= 5.2045 | C@1d= 6 | minLinf=1.47e-02 | T=  2.50s | ARI=0.1474
+[ADMM]  29/30 λ= 7.9028 | C@1d= 4 | minLinf=2.16e-02 | T=  2.60s | ARI=0.0816
+[ADMM]  30/30 λ=12.0000 | C@1d= 4 | minLinf=1.32e-02 | T=  2.49s | ARI=0.1140
+[Alt] pick Z* from lambda idx=27 (ARI=0.1474)
+=== [Alt Cycle 1] Finetune NN with tether mu=1.0 ===
+[Train] it=  100 | val_mse=0.452697
+
+=== [Alt Cycle 2/4] ADMM ===
+[ADMM]   1/30 λ= 0.0000 | C@1d= 7 | minLinf=1.44e-02 | T=  1.93s | ARI=0.1639
+[ADMM]   2/30 λ= 0.0001 | C@1d= 6 | minLinf=1.40e-02 | T=  2.57s | ARI=0.5263
+[ADMM]   3/30 λ= 0.0002 | C@1d= 7 | minLinf=1.25e-02 | T=  2.42s | ARI=0.1639
+[ADMM]   4/30 λ= 0.0002 | C@1d= 9 | minLinf=1.17e-02 | T=  2.59s | ARI=0.0552
+[ADMM]   5/30 λ= 0.0004 | C@1d=10 | minLinf=1.59e-02 | T=  2.53s | ARI=0.0000
+[ADMM]   6/30 λ= 0.0005 | C@1d=10 | minLinf=2.04e-02 | T=  2.93s | ARI=0.0000
+[ADMM]   7/30 λ= 0.0008 | C@1d= 9 | minLinf=2.36e-02 | T=  2.48s | ARI=0.0552
+[ADMM]   8/30 λ= 0.0012 | C@1d= 8 | minLinf=2.66e-02 | T=  2.50s | ARI=0.1099
+[ADMM]   9/30 λ= 0.0019 | C@1d= 9 | minLinf=2.80e-02 | T=  2.50s | ARI=0.0552
+[ADMM]  10/30 λ= 0.0028 | C@1d= 9 | minLinf=2.83e-02 | T=  2.50s | ARI=0.0552
+[ADMM]  11/30 λ= 0.0043 | C@1d=10 | minLinf=2.76e-02 | T=  2.60s | ARI=0.0000
+[ADMM]  12/30 λ= 0.0065 | C@1d=10 | minLinf=2.65e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  13/30 λ= 0.0099 | C@1d=10 | minLinf=2.15e-02 | T=  2.30s | ARI=0.0000
+[ADMM]  14/30 λ= 0.0150 | C@1d= 7 | minLinf=1.71e-02 | T=  2.50s | ARI=0.1639
+[ADMM]  15/30 λ= 0.0228 | C@1d= 4 | minLinf=2.16e-03 | T=  2.60s | ARI=0.6736
+[ADMM]  16/30 λ= 0.0346 | C@1d= 4 | minLinf=1.48e-03 | T=  2.60s | ARI=0.5263
+[ADMM]  17/30 λ= 0.0526 | C@1d= 3 | minLinf=1.39e-03 | T=  2.50s | ARI=0.7216
+[ADMM]  18/30 λ= 0.0799 | C@1d= 3 | minLinf=2.25e-03 | T=  2.14s | ARI=0.7216
+[ADMM]  19/30 λ= 0.1213 | C@1d= 4 | minLinf=2.59e-03 | T=  2.56s | ARI=0.5263
+[ADMM]  20/30 λ= 0.1842 | C@1d= 4 | minLinf=8.20e-03 | T=  2.50s | ARI=0.6736
+[ADMM]  21/30 λ= 0.2796 | C@1d= 5 | minLinf=1.16e-02 | T=  2.59s | ARI=0.3226
+[ADMM]  22/30 λ= 0.4246 | C@1d= 7 | minLinf=8.51e-03 | T=  2.50s | ARI=0.0323
+[ADMM]  23/30 λ= 0.6447 | C@1d= 8 | minLinf=2.27e-02 | T=  2.50s | ARI=0.1639
+[ADMM]  24/30 λ= 0.9790 | C@1d= 8 | minLinf=9.99e-03 | T=  2.50s | ARI=0.1099
+[ADMM]  25/30 λ= 1.4866 | C@1d= 9 | minLinf=1.85e-02 | T=  2.50s | ARI=0.0552
+[ADMM]  26/30 λ= 2.2573 | C@1d= 8 | minLinf=1.92e-02 | T=  2.50s | ARI=-0.0328
+[ADMM]  27/30 λ= 3.4275 | C@1d= 8 | minLinf=1.32e-02 | T=  2.50s | ARI=0.1099
+[ADMM]  28/30 λ= 5.2045 | C@1d= 6 | minLinf=9.90e-03 | T=  2.51s | ARI=0.0217
+[ADMM]  29/30 λ= 7.9028 | C@1d= 9 | minLinf=2.40e-02 | T=  2.58s | ARI=0.0552
+[ADMM]  30/30 λ=12.0000 | C@1d= 9 | minLinf=2.41e-02 | T=  2.50s | ARI=-0.0442
+[Alt] pick Z* from lambda idx=16 (ARI=0.7216)
+=== [Alt Cycle 2] Finetune NN with tether mu=1.0 ===
+[Train] it=  100 | val_mse=0.271140
+
+=== [Alt Cycle 3/4] ADMM ===
+[ADMM]   1/30 λ= 0.0000 | C@1d= 8 | minLinf=2.99e-02 | T=  2.04s | ARI=0.1099
+[ADMM]   2/30 λ= 0.0001 | C@1d= 7 | minLinf=2.49e-02 | T=  2.12s | ARI=0.2174
+[ADMM]   3/30 λ= 0.0002 | C@1d= 8 | minLinf=2.34e-02 | T=  2.00s | ARI=0.1639
+[ADMM]   4/30 λ= 0.0002 | C@1d= 7 | minLinf=2.45e-02 | T=  2.35s | ARI=0.2174
+[ADMM]   5/30 λ= 0.0004 | C@1d= 8 | minLinf=2.45e-02 | T=  2.29s | ARI=0.1639
+[ADMM]   6/30 λ= 0.0005 | C@1d= 8 | minLinf=2.34e-02 | T=  2.54s | ARI=0.1099
+[ADMM]   7/30 λ= 0.0008 | C@1d= 9 | minLinf=2.35e-02 | T=  2.61s | ARI=0.0552
+[ADMM]   8/30 λ= 0.0012 | C@1d= 9 | minLinf=2.13e-02 | T=  2.50s | ARI=0.0552
+[ADMM]   9/30 λ= 0.0019 | C@1d= 9 | minLinf=2.14e-02 | T=  2.59s | ARI=0.0552
+[ADMM]  10/30 λ= 0.0028 | C@1d= 9 | minLinf=2.19e-02 | T=  2.71s | ARI=0.0552
+[ADMM]  11/30 λ= 0.0043 | C@1d= 8 | minLinf=2.17e-02 | T=  2.59s | ARI=0.1639
+[ADMM]  12/30 λ= 0.0065 | C@1d= 9 | minLinf=2.07e-02 | T=  2.49s | ARI=0.0552
+[ADMM]  13/30 λ= 0.0099 | C@1d= 7 | minLinf=2.02e-02 | T=  2.62s | ARI=0.2174
+[ADMM]  14/30 λ= 0.0150 | C@1d= 7 | minLinf=1.62e-02 | T=  2.48s | ARI=0.2174
+[ADMM]  15/30 λ= 0.0228 | C@1d= 3 | minLinf=2.74e-03 | T=  2.40s | ARI=0.7216
+[ADMM]  16/30 λ= 0.0346 | C@1d= 2 | minLinf=1.28e-03 | T=  2.60s | ARI=1.0000
+[ADMM]  17/30 λ= 0.0526 | C@1d= 3 | minLinf=2.75e-03 | T=  2.50s | ARI=0.8163
+[ADMM]  18/30 λ= 0.0799 | C@1d= 2 | minLinf=2.49e-03 | T=  2.50s | ARI=1.0000
+[ADMM]  19/30 λ= 0.1213 | C@1d= 5 | minLinf=3.25e-03 | T=  2.50s | ARI=0.3226
+[ADMM]  20/30 λ= 0.1842 | C@1d= 6 | minLinf=1.20e-02 | T=  2.50s | ARI=0.5263
+[ADMM]  21/30 λ= 0.2796 | C@1d= 7 | minLinf=5.94e-03 | T=  2.50s | ARI=0.2174
+[ADMM]  22/30 λ= 0.4246 | C@1d= 7 | minLinf=1.21e-02 | T=  2.50s | ARI=0.0217
+[ADMM]  23/30 λ= 0.6447 | C@1d= 9 | minLinf=2.18e-02 | T=  2.50s | ARI=0.0552
+[ADMM]  24/30 λ= 0.9790 | C@1d= 8 | minLinf=8.34e-03 | T=  2.60s | ARI=0.1099
+[ADMM]  25/30 λ= 1.4866 | C@1d=10 | minLinf=3.69e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  26/30 λ= 2.2573 | C@1d= 8 | minLinf=2.11e-02 | T=  2.50s | ARI=0.0110
+[ADMM]  27/30 λ= 3.4275 | C@1d=10 | minLinf=2.38e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  28/30 λ= 5.2045 | C@1d= 6 | minLinf=1.02e-02 | T=  2.71s | ARI=-0.0216
+[ADMM]  29/30 λ= 7.9028 | C@1d=10 | minLinf=1.71e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  30/30 λ=12.0000 | C@1d= 8 | minLinf=1.22e-02 | T=  2.50s | ARI=-0.0879
+[Alt] pick Z* from lambda idx=15 (ARI=1.0000)
+=== [Alt Cycle 3] Finetune NN with tether mu=1.0 ===
+[Train] it=  100 | val_mse=0.261807
+
+=== [Alt Cycle 4/4] ADMM ===
+[ADMM]   1/30 λ= 0.0000 | C@1d= 8 | minLinf=2.51e-02 | T=  2.13s | ARI=0.1099
+[ADMM]   2/30 λ= 0.0001 | C@1d= 9 | minLinf=2.56e-02 | T=  2.20s | ARI=0.0552
+[ADMM]   3/30 λ= 0.0002 | C@1d=10 | minLinf=2.44e-02 | T=  2.06s | ARI=0.0000
+[ADMM]   4/30 λ= 0.0002 | C@1d=10 | minLinf=2.32e-02 | T=  2.17s | ARI=0.0000
+[ADMM]   5/30 λ= 0.0004 | C@1d=10 | minLinf=2.29e-02 | T=  2.48s | ARI=0.0000
+[ADMM]   6/30 λ= 0.0005 | C@1d=10 | minLinf=2.30e-02 | T=  2.62s | ARI=0.0000
+[ADMM]   7/30 λ= 0.0008 | C@1d=10 | minLinf=2.34e-02 | T=  2.66s | ARI=0.0000
+[ADMM]   8/30 λ= 0.0012 | C@1d=10 | minLinf=2.37e-02 | T=  2.52s | ARI=0.0000
+[ADMM]   9/30 λ= 0.0019 | C@1d=10 | minLinf=2.64e-02 | T=  2.59s | ARI=0.0000
+[ADMM]  10/30 λ= 0.0028 | C@1d= 9 | minLinf=2.86e-02 | T=  2.50s | ARI=0.0552
+[ADMM]  11/30 λ= 0.0043 | C@1d=10 | minLinf=2.75e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  12/30 λ= 0.0065 | C@1d=10 | minLinf=2.64e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  13/30 λ= 0.0099 | C@1d=10 | minLinf=2.22e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  14/30 λ= 0.0150 | C@1d= 8 | minLinf=1.79e-02 | T=  2.50s | ARI=0.1099
+[ADMM]  15/30 λ= 0.0228 | C@1d= 5 | minLinf=7.73e-03 | T=  2.50s | ARI=0.5759
+[ADMM]  16/30 λ= 0.0346 | C@1d= 3 | minLinf=1.72e-03 | T=  2.46s | ARI=0.8163
+[ADMM]  17/30 λ= 0.0526 | C@1d= 3 | minLinf=2.09e-03 | T=  2.63s | ARI=0.8163
+[ADMM]  18/30 λ= 0.0799 | C@1d= 4 | minLinf=2.03e-03 | T=  2.70s | ARI=0.4255
+[ADMM]  19/30 λ= 0.1213 | C@1d= 5 | minLinf=3.76e-03 | T=  2.51s | ARI=0.4762
+[ADMM]  20/30 λ= 0.1842 | C@1d= 4 | minLinf=6.74e-03 | T=  2.50s | ARI=-0.0299
+[ADMM]  21/30 λ= 0.2796 | C@1d= 4 | minLinf=4.72e-03 | T=  2.69s | ARI=0.6736
+[ADMM]  22/30 λ= 0.4246 | C@1d= 8 | minLinf=2.19e-02 | T=  2.49s | ARI=0.1639
+[ADMM]  23/30 λ= 0.6447 | C@1d= 8 | minLinf=1.38e-02 | T=  2.60s | ARI=-0.0328
+[ADMM]  24/30 λ= 0.9790 | C@1d= 8 | minLinf=1.11e-02 | T=  2.54s | ARI=-0.0328
+[ADMM]  25/30 λ= 1.4866 | C@1d=10 | minLinf=1.64e-02 | T=  2.46s | ARI=0.0000
+[ADMM]  26/30 λ= 2.2573 | C@1d=10 | minLinf=1.81e-02 | T=  2.50s | ARI=0.0000
+[ADMM]  27/30 λ= 3.4275 | C@1d= 7 | minLinf=1.35e-02 | T=  2.49s | ARI=-0.0761
+[ADMM]  28/30 λ= 5.2045 | C@1d= 8 | minLinf=1.41e-02 | T=  2.50s | ARI=0.1099
+[ADMM]  29/30 λ= 7.9028 | C@1d= 8 | minLinf=2.17e-02 | T=  2.50s | ARI=-0.0328
+[ADMM]  30/30 λ=12.0000 | C@1d= 8 | minLinf=1.77e-02 | T=  2.69s | ARI=-0.0328
+[Alt] pick Z* from lambda idx=15 (ARI=0.8163)
+=== [Alt Cycle 4] Finetune NN with tether mu=1.0 ===
+[Train] it=  100 | val_mse=0.260058
+[Save] Z path -> outputs/v2_weak_nl/Z_path_cycle1.npy | shape=(30, 10, 16)
+[Save] metrics -> outputs/v2_weak_nl/path_metrics_cycle1.csv
+[Save] dendrogram -> outputs/v2_weak_nl/dendrogram_cycle1.png
+[Save] Z path -> outputs/v2_weak_nl/Z_path_cycle2.npy | shape=(30, 10, 16)
+[Save] metrics -> outputs/v2_weak_nl/path_metrics_cycle2.csv
+[Save] dendrogram -> outputs/v2_weak_nl/dendrogram_cycle2.png
+[Save] Z path -> outputs/v2_weak_nl/Z_path_cycle3.npy | shape=(30, 10, 16)
+[Save] metrics -> outputs/v2_weak_nl/path_metrics_cycle3.csv
+[Save] dendrogram -> outputs/v2_weak_nl/dendrogram_cycle3.png
+[Save] Z path -> outputs/v2_weak_nl/Z_path_cycle4.npy | shape=(30, 10, 16)
+[Save] metrics -> outputs/v2_weak_nl/path_metrics_cycle4.csv
+[Save] dendrogram -> outputs/v2_weak_nl/dendrogram_cycle4.png
