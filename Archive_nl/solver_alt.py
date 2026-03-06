@@ -1,4 +1,4 @@
-# Archive_new/solver_alt.py
+# Archive_nl/solver_alt.py
 import os
 import numpy as np
 import torch
@@ -147,10 +147,10 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
             best_i = None
             best_ari = -1e9
             for m in metrics:
-                if m["ari_round3"] is None:
+                if m["ari_eval"] is None:
                     continue
-                if m["ari_round3"] > best_ari:
-                    best_ari = m["ari_round3"]
+                if m["ari_eval"] > best_ari:
+                    best_ari = m["ari_eval"]
                     best_i = int(m["lambda_index"])
             if best_i is None:
                 best_i = len(all_Z) - 1
@@ -198,5 +198,6 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
         })
 
     return all_cycles
+
 
 
