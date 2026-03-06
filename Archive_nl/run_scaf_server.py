@@ -52,7 +52,7 @@ def save_cycle_artifacts(outdir, cycle_id, lambda_values, cycle_pack, args, log_
         dendro = plot_scaf_dendrogram(
             lambda_values=lambda_values,
             all_Z_list=Z_list,
-            round_decimals=int(getattr(args, "round_decimals", 3)),
+            round_decimals=int(getattr(args, "round_decimals", 1)),
             title=f"SCAF Path cycle{cycle_id} ({args.penalty}, rho={args.rho}, gamma={args.gamma_mcp}, a={args.a_scad})",
             save_path=dendro_file
         )
@@ -60,16 +60,6 @@ def save_cycle_artifacts(outdir, cycle_id, lambda_values, cycle_pack, args, log_
         log_fn(f"[Warn] dendrogram failed in cycle {cycle_id}: {repr(e)}")
 
     log_fn(f"[Save] dendrogram -> {dendro}")
-
-    #dendro = plot_scaf_dendrogram(
-    #    lambda_values=lambda_values,
-    #    all_Z_list=Z_list,
-        # round_decimals=int(args.round_decimals),
-    #    round_decimals=int(getattr(args, "round_decimals", 3)),
-    #    title=f"SCAF Path cycle{cycle_id} ({args.penalty}, rho={args.rho}, gamma={args.gamma_mcp}, a={args.a_scad})",
-    #    save_path=dendro_file
-    #)
-    #log_fn(f"[Save] dendrogram -> {dendro}")
 
 
 def main():
@@ -84,8 +74,14 @@ def main():
         help="Synthetic data version: 1=linear, 2=weak nonlinear, 3=moderate, 4=strong"
     )
     # add data_version end
-    # add 3.0
-    parser.add_argument("--round_decimals", type=int, default=3)
+    # Week 9
+    parser.add_argument(
+        "--round_decimals",
+        type=int,
+        default=1,
+        help="Number of decimals used to detect approximate fusion in metrics/dendrogram."
+    )
+
     #
     args = parser.parse_args()
 
@@ -94,6 +90,7 @@ def main():
     log_fn, log_file = make_logger(os.path.join(outdir, "run.log"))
     log_fn(f"[Run] outdir = {outdir}")
     log_fn(f"[Run] Data Version = {args.data_version}")
+    log_fn(f"[Run] round_decimals = {args.round_decimals}")
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     log_fn(f"--- Using device: {device} ---")
@@ -103,9 +100,7 @@ def main():
         raise ValueError("Synthetic generator assumes n_classes=10.")
 
     true_groups = [list(range(0, 5)), list(range(5, 10))]
-    #X_train, A_train, y_train, _ = generate_synthetic_data(
-    #    args.n_train, args.n_features, args.n_classes, true_groups, args.seed_train
-    #)
+    
     # add data_version
     X_train, A_train, y_train, _ = generate_synthetic_data(
         args.n_train,
@@ -116,9 +111,7 @@ def main():
         version=args.data_version
     )
 
-    #X_test, A_test, y_test, _ = generate_synthetic_data(
-    #    args.n_test, args.n_features, args.n_classes, true_groups, args.seed_test
-    #)
+   
     X_test, A_test, y_test, _ = generate_synthetic_data(
         args.n_test,
         args.n_features,
@@ -128,9 +121,13 @@ def main():
         version=args.data_version
     )
 
+    X_train = X_train.to(device)
+    A_train = A_train.to(device)
+    y_train = y_train.to(device)
 
-    X_train = X_train.to(device); A_train.to(device); y_train = y_train.to(device)
-    X_test  = X_test.to(device); A_test = A_test.to(device);  y_test  = y_test.to(device)
+    X_test = X_test.to(device)
+    A_test = A_test.to(device)
+    y_test = y_test.to(device)
 
     # model
     model = Net(
@@ -181,7 +178,7 @@ def main():
 
         )
 
-        # cycles 是一个 list，每个元素是 {"cycle":..., "all_Z":..., "admm_metrics":...}
+        # cycles is a list
 
         for pack in cycles:
             cid = int(pack["cycle"])
@@ -195,6 +192,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
