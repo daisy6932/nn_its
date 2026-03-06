@@ -62,6 +62,34 @@ def _phi_features(
 
     raise ValueError(f"Unknown version={version}. Use 1/2/3/4.")
 
+# Week 9: added baseline term
+def _baseline_function(
+    X: torch.Tensor,
+    scale: float = 1.0,
+    version: int = 1,
+) -> torch.Tensor:
+    """
+    Shared baseline function m(X), common to all treatments.
+    Returns tensor of shape [n].
+    """
+    x1 = X[:, 0]
+    x2 = X[:, 1] if X.shape[1] >= 2 else torch.zeros_like(x1)
+    x3 = X[:, 2] if X.shape[1] >= 3 else torch.zeros_like(x1)
+
+    if version == 1:
+        # simple linear baseline
+        m = 0.8 * x1 - 0.5 * x2 + 0.3 * x3
+    elif version == 2:
+        # weakly nonlinear baseline
+        m = 0.6 * x1 - 0.4 * x2 + 0.2 * (x3 ** 2)
+    elif version in (3, 4):
+        # more nonlinear baseline, but still moderate
+        m = 0.6 * torch.cos(math.pi * x1) + 0.4 * (x2 ** 2) - 0.3 * x3
+    else:
+        raise ValueError(f"Unknown version={version}.")
+
+    return scale * m
+
 
 def generate_synthetic_data(
     n_samples: int,
@@ -76,6 +104,7 @@ def generate_synthetic_data(
     c2: float = 1.0,         # used in v4
     c3: float = 1.0,         # used in v4
     c4: float = 1.0,         # used in v4
+    baseline_scale: float = 1.0,
 ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
     """
     Generate regression-style synthetic data:
@@ -151,8 +180,10 @@ def generate_synthetic_data(
                 raise ValueError(f"Treatment index {m} out of range for M={M}.")
             beta_true[m] = g0 if gi == 0 else g1
 
-    # 5) y = <Phi(X), beta_{A}> + noise
-    y_mean = (Phi * beta_true[A]).sum(dim=1)
-    y = y_mean + float(noise_std) * torch.randn(n, device=cpu)
+    # 5) shared baseline + treatment-specific effect + noise
+    m = _baseline_function(X, scale=baseline_scale, version=version)
+    tau = (Phi * beta_true[A]).sum(dim=1)
+    y = m + tau + float(noise_std) * torch.randn(n, device=cpu)
 
     return X, A, y, beta_true
+
