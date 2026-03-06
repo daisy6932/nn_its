@@ -1,4 +1,4 @@
-# Archive_new/solver_admm.py
+# Archive_nl/solver_admm.py
 import os
 import time
 import numpy as np
@@ -138,23 +138,41 @@ def run_admm_path(
         all_Z.append(Z_np)
 
         # ---- metrics
-        c2 = int(np.unique(np.round(Z_np, 2), axis=0).shape[0])
-        c3 = int(np.unique(np.round(Z_np, 3), axis=0).shape[0])
+        round_decimals = int(getattr(args, "round_decimals", 1))
+
+        c_eval = int(np.unique(np.round(Z_np, round_decimals), axis=0).shape[0])
         linf = _min_pairwise_linf(Z_np)
         dt = time.time() - t0
 
-        # optional: evaluate ARI of clustering on Z rows (still meaningful)
         ari = None
         if true_group_labels is not None:
-            Zr = np.round(Z_np, 3)
+            Zr = np.round(Z_np, round_decimals)
             _, cid = np.unique(Zr, axis=0, return_inverse=True)
             ari = float(adjusted_rand_score(true_group_labels, cid))
 
+        #c2 = int(np.unique(np.round(Z_np, 2), axis=0).shape[0])
+        #c3 = int(np.unique(np.round(Z_np, 3), axis=0).shape[0])
+        #linf = _min_pairwise_linf(Z_np)
+        #dt = time.time() - t0
+
+        # optional: evaluate ARI of clustering on Z rows (still meaningful)
+        #ari = None
+        #if true_group_labels is not None:
+        #    Zr = np.round(Z_np, 3)
+        #    _, cid = np.unique(Zr, axis=0, return_inverse=True)
+        #    ari = float(adjusted_rand_score(true_group_labels, cid))
+
+        #msg = (
+        #    f"[ADMM] {li+1:3d}/{len(lambda_values)} "
+        #    f"λ={lam:7.4f} | C2={c2:2d} C3={c3:2d} | "
+        #    f"minLinf={linf:.2e} | T={dt:6.2f}s"
+        #)
         msg = (
             f"[ADMM] {li+1:3d}/{len(lambda_values)} "
-            f"λ={lam:7.4f} | C2={c2:2d} C3={c3:2d} | "
+            f"λ={lam:7.4f} | C@{round_decimals}d={c_eval:2d} | "
             f"minLinf={linf:.2e} | T={dt:6.2f}s"
         )
+
         if ari is not None:
             msg += f" | ARI={ari:.4f}"
         log_fn(msg)
@@ -164,17 +182,18 @@ def run_admm_path(
                 "lambda_index": li,
                 "lambda": lam,
                 "rho": rho,
-                "clusters_2d": c2,
-                "clusters_3d": c3,
+                "round_decimals": round_decimals,
+                "clusters_eval": c_eval,
                 "min_linf": linf,
                 "time_sec": dt,
-                "ari_round3": ari,
+                "ari_eval": ari,
             }
         )
 
-    # =========================
+
+    # 
     # Save Z_path to disk
-    # =========================
+    # 
     if outdir is not None:
         os.makedirs(outdir, exist_ok=True)
 
@@ -199,5 +218,6 @@ def run_admm_path(
             log_fn(f"[Save] U_last -> {ulast_file}")
 
     return all_Z, metrics, Z.detach(), U.detach()
+
 
 
