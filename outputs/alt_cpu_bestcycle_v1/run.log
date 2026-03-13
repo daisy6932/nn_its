@@ -1,0 +1,190 @@
+[Run] outdir = outputs/alt_cpu_bestcycle_v1
+[Run] Data Version = 1
+[Run] round_decimals = 1
+--- Using device: cpu ---
+Lambda values (len=30): [0.00000000e+00 1.00000000e-04 1.59784498e-04 2.55310859e-04
+ 4.07947174e-04 6.51836345e-04 1.04153343e-03 1.66420897e-03
+ 2.65914795e-03 4.24890620e-03 6.78909346e-03 1.08479189e-02
+ 1.73332928e-02 2.76959149e-02 4.42537786e-02 7.07106781e-02
+ 1.12984702e-01 1.80532039e-01 2.88462213e-01 4.60917900e-01
+ 7.36475353e-01 1.17677345e+00 1.88030155e+00 3.00443039e+00
+ 4.80061402e+00 7.67063702e+00 1.22564889e+01 1.95839692e+01
+ 3.12921470e+01 5.00000000e+01]
+--- [Stage 1] Pretrain NN (regression) ---
+[Train] it=  100 | val_mse=0.788804
+[Train] it=  200 | val_mse=0.384803
+
+=== [Alt Cycle 1/5] ADMM ===
+[ADMM]   1/30 λ= 0.0000 | C@1d=10 | minLinf=2.67e-01 | T=  0.80s | ARI=0.0000
+[ADMM]   2/30 λ= 0.0001 | C@1d=10 | minLinf=2.69e-01 | T=  0.70s | ARI=0.0000
+[ADMM]   3/30 λ= 0.0002 | C@1d=10 | minLinf=2.73e-01 | T=  0.69s | ARI=0.0000
+[ADMM]   4/30 λ= 0.0003 | C@1d=10 | minLinf=2.76e-01 | T=  0.76s | ARI=0.0000
+[ADMM]   5/30 λ= 0.0004 | C@1d=10 | minLinf=2.75e-01 | T=  0.77s | ARI=0.0000
+[ADMM]   6/30 λ= 0.0007 | C@1d=10 | minLinf=2.71e-01 | T=  0.83s | ARI=0.0000
+[ADMM]   7/30 λ= 0.0010 | C@1d=10 | minLinf=2.67e-01 | T=  0.43s | ARI=0.0000
+[ADMM]   8/30 λ= 0.0017 | C@1d=10 | minLinf=2.63e-01 | T=  0.73s | ARI=0.0000
+[ADMM]   9/30 λ= 0.0027 | C@1d=10 | minLinf=2.59e-01 | T=  0.96s | ARI=0.0000
+[ADMM]  10/30 λ= 0.0042 | C@1d=10 | minLinf=2.56e-01 | T=  1.11s | ARI=0.0000
+[ADMM]  11/30 λ= 0.0068 | C@1d=10 | minLinf=2.54e-01 | T=  0.73s | ARI=0.0000
+[ADMM]  12/30 λ= 0.0108 | C@1d=10 | minLinf=2.50e-01 | T=  0.79s | ARI=0.0000
+[ADMM]  13/30 λ= 0.0173 | C@1d=10 | minLinf=2.46e-01 | T=  0.70s | ARI=0.0000
+[ADMM]  14/30 λ= 0.0277 | C@1d=10 | minLinf=2.28e-01 | T=  0.91s | ARI=0.0000
+[ADMM]  15/30 λ= 0.0443 | C@1d=10 | minLinf=2.26e-01 | T=  0.84s | ARI=0.0000
+[ADMM]  16/30 λ= 0.0707 | C@1d=10 | minLinf=2.33e-01 | T=  1.00s | ARI=0.0000
+[ADMM]  17/30 λ= 0.1130 | C@1d=10 | minLinf=2.96e-01 | T=  0.85s | ARI=0.0000
+[ADMM]  18/30 λ= 0.1805 | C@1d=10 | minLinf=2.54e-01 | T=  0.73s | ARI=0.0000
+[ADMM]  19/30 λ= 0.2885 | C@1d=10 | minLinf=1.94e-01 | T=  0.94s | ARI=0.0000
+[ADMM]  20/30 λ= 0.4609 | C@1d=10 | minLinf=1.22e-01 | T=  0.87s | ARI=0.0000
+[ADMM]  21/30 λ= 0.7365 | C@1d=10 | minLinf=4.08e-02 | T=  0.92s | ARI=0.0000
+[ADMM]  22/30 λ= 1.1768 | C@1d=10 | minLinf=4.75e-02 | T=  0.96s | ARI=0.0000
+[ADMM]  23/30 λ= 1.8803 | C@1d= 9 | minLinf=3.17e-02 | T=  0.67s | ARI=0.0552
+[ADMM]  24/30 λ= 3.0044 | C@1d= 5 | minLinf=1.18e-02 | T=  0.66s | ARI=-0.0615
+[ADMM]  25/30 λ= 4.8006 | C@1d= 5 | minLinf=1.93e-02 | T=  0.99s | ARI=-0.0107
+[ADMM]  26/30 λ= 7.6706 | C@1d= 5 | minLinf=9.50e-03 | T=  1.16s | ARI=0.0000
+[ADMM]  27/30 λ=12.2565 | C@1d= 4 | minLinf=2.11e-02 | T=  1.22s | ARI=-0.1020
+[ADMM]  28/30 λ=19.5840 | C@1d= 3 | minLinf=9.76e-03 | T=  0.98s | ARI=-0.0385
+[ADMM]  29/30 λ=31.2921 | C@1d= 3 | minLinf=1.25e-02 | T=  0.68s | ARI=-0.0909
+[ADMM]  30/30 λ=50.0000 | C@1d= 5 | minLinf=1.94e-02 | T=  0.88s | ARI=0.0308
+[Save] Z_path -> outputs/alt_cpu_bestcycle_v1/Z_path_cycle1.npy  (shape=(30, 10, 16))
+[Save] Z_last -> outputs/alt_cpu_bestcycle_v1/Z_last_cycle1.npy
+[Save] U_last -> outputs/alt_cpu_bestcycle_v1/U_last_cycle1.npy
+[Alt] pick Z* from lambda idx=22 (ARI=0.0552)
+=== [Alt Cycle 1] Finetune NN with tether mu=1.0 ===
+[Train] it=  100 | val_mse=0.536778
+[Cycle 1] validation_mse = 0.536778
+[Cycle 1] New best validation MSE: 0.536778
+
+=== [Alt Cycle 2/5] ADMM ===
+[ADMM]   1/30 λ= 0.0000 | C@1d= 9 | minLinf=2.40e-02 | T=  0.86s | ARI=0.0552
+[ADMM]   2/30 λ= 0.0001 | C@1d=10 | minLinf=2.03e-02 | T=  0.62s | ARI=0.0000
+[ADMM]   3/30 λ= 0.0002 | C@1d= 9 | minLinf=1.55e-02 | T=  0.78s | ARI=0.0552
+[ADMM]   4/30 λ= 0.0003 | C@1d= 9 | minLinf=1.97e-02 | T=  0.96s | ARI=0.0552
+[ADMM]   5/30 λ= 0.0004 | C@1d=10 | minLinf=2.32e-02 | T=  1.21s | ARI=0.0000
+[ADMM]   6/30 λ= 0.0007 | C@1d=10 | minLinf=2.81e-02 | T=  1.12s | ARI=0.0000
+[ADMM]   7/30 λ= 0.0010 | C@1d=10 | minLinf=3.16e-02 | T=  1.16s | ARI=0.0000
+[ADMM]   8/30 λ= 0.0017 | C@1d=10 | minLinf=3.40e-02 | T=  1.19s | ARI=0.0000
+[ADMM]   9/30 λ= 0.0027 | C@1d=10 | minLinf=3.55e-02 | T=  1.12s | ARI=0.0000
+[ADMM]  10/30 λ= 0.0042 | C@1d=10 | minLinf=3.75e-02 | T=  1.14s | ARI=0.0000
+[ADMM]  11/30 λ= 0.0068 | C@1d= 9 | minLinf=3.82e-02 | T=  1.09s | ARI=0.0552
+[ADMM]  12/30 λ= 0.0108 | C@1d= 9 | minLinf=3.64e-02 | T=  1.11s | ARI=0.0552
+[ADMM]  13/30 λ= 0.0173 | C@1d= 8 | minLinf=4.83e-02 | T=  0.77s | ARI=0.1099
+[ADMM]  14/30 λ= 0.0277 | C@1d= 6 | minLinf=2.46e-02 | T=  1.22s | ARI=0.3743
+[ADMM]  15/30 λ= 0.0443 | C@1d= 4 | minLinf=2.77e-03 | T=  1.06s | ARI=0.6736
+[ADMM]  16/30 λ= 0.0707 | C@1d= 4 | minLinf=1.97e-03 | T=  1.37s | ARI=0.6250
+[ADMM]  17/30 λ= 0.1130 | C@1d= 3 | minLinf=3.94e-03 | T=  1.19s | ARI=0.8163
+[ADMM]  18/30 λ= 0.1805 | C@1d= 5 | minLinf=8.23e-03 | T=  1.01s | ARI=0.5759
+[ADMM]  19/30 λ= 0.2885 | C@1d= 6 | minLinf=1.22e-02 | T=  1.08s | ARI=0.3743
+[ADMM]  20/30 λ= 0.4609 | C@1d= 6 | minLinf=1.30e-02 | T=  0.99s | ARI=0.3743
+[ADMM]  21/30 λ= 0.7365 | C@1d= 6 | minLinf=1.90e-02 | T=  1.10s | ARI=-0.0421
+[ADMM]  22/30 λ= 1.1768 | C@1d= 6 | minLinf=1.89e-02 | T=  1.12s | ARI=0.1474
+[ADMM]  23/30 λ= 1.8803 | C@1d= 8 | minLinf=2.12e-02 | T=  1.00s | ARI=0.1099
+[ADMM]  24/30 λ= 3.0044 | C@1d= 5 | minLinf=1.53e-02 | T=  1.11s | ARI=-0.0838
+[ADMM]  25/30 λ= 4.8006 | C@1d= 6 | minLinf=2.12e-02 | T=  1.09s | ARI=-0.0645
+[ADMM]  26/30 λ= 7.6706 | C@1d= 5 | minLinf=2.52e-02 | T=  1.06s | ARI=0.0323
+[ADMM]  27/30 λ=12.2565 | C@1d= 6 | minLinf=1.26e-02 | T=  0.80s | ARI=0.0757
+[ADMM]  28/30 λ=19.5840 | C@1d= 5 | minLinf=1.13e-02 | T=  1.20s | ARI=-0.0532
+[ADMM]  29/30 λ=31.2921 | C@1d= 5 | minLinf=2.63e-02 | T=  1.29s | ARI=0.0105
+[ADMM]  30/30 λ=50.0000 | C@1d= 6 | minLinf=1.74e-02 | T=  1.07s | ARI=0.0856
+[Save] Z_path -> outputs/alt_cpu_bestcycle_v1/Z_path_cycle2.npy  (shape=(30, 10, 16))
+[Save] Z_last -> outputs/alt_cpu_bestcycle_v1/Z_last_cycle2.npy
+[Save] U_last -> outputs/alt_cpu_bestcycle_v1/U_last_cycle2.npy
+[Alt] pick Z* from lambda idx=16 (ARI=0.8163)
+=== [Alt Cycle 2] Finetune NN with tether mu=1.0 ===
+[Train] it=  100 | val_mse=0.348627
+[Cycle 2] validation_mse = 0.348627
+[Cycle 2] New best validation MSE: 0.348627
+
+=== [Alt Cycle 3/5] ADMM ===
+[ADMM]   1/30 λ= 0.0000 | C@1d= 9 | minLinf=2.38e-02 | T=  0.96s | ARI=0.0552
+[ADMM]   2/30 λ= 0.0001 | C@1d= 8 | minLinf=2.44e-02 | T=  1.03s | ARI=0.1099
+[ADMM]   3/30 λ= 0.0002 | C@1d= 7 | minLinf=2.41e-02 | T=  0.80s | ARI=0.1639
+[ADMM]   4/30 λ= 0.0003 | C@1d= 9 | minLinf=2.41e-02 | T=  0.77s | ARI=0.0552
+[ADMM]   5/30 λ= 0.0004 | C@1d= 9 | minLinf=2.43e-02 | T=  1.04s | ARI=0.0552
+[ADMM]   6/30 λ= 0.0007 | C@1d= 9 | minLinf=2.46e-02 | T=  1.38s | ARI=0.0552
+[ADMM]   7/30 λ= 0.0010 | C@1d=10 | minLinf=2.50e-02 | T=  1.38s | ARI=0.0000
+[ADMM]   8/30 λ= 0.0017 | C@1d=10 | minLinf=2.65e-02 | T=  1.05s | ARI=0.0000
+[ADMM]   9/30 λ= 0.0027 | C@1d= 9 | minLinf=2.74e-02 | T=  1.24s | ARI=0.0552
+[ADMM]  10/30 λ= 0.0042 | C@1d=10 | minLinf=2.75e-02 | T=  1.16s | ARI=0.0000
+[ADMM]  11/30 λ= 0.0068 | C@1d= 9 | minLinf=2.81e-02 | T=  1.09s | ARI=0.0552
+[ADMM]  12/30 λ= 0.0108 | C@1d= 8 | minLinf=2.84e-02 | T=  1.04s | ARI=0.1639
+[ADMM]  13/30 λ= 0.0173 | C@1d= 7 | minLinf=1.94e-02 | T=  1.11s | ARI=0.3226
+[ADMM]  14/30 λ= 0.0277 | C@1d= 6 | minLinf=1.58e-03 | T=  1.13s | ARI=0.3743
+[ADMM]  15/30 λ= 0.0443 | C@1d= 2 | minLinf=2.19e-03 | T=  1.05s | ARI=1.0000
+[ADMM]  16/30 λ= 0.0707 | C@1d= 2 | minLinf=2.22e-03 | T=  1.28s | ARI=1.0000
+[ADMM]  17/30 λ= 0.1130 | C@1d= 4 | minLinf=3.47e-03 | T=  1.05s | ARI=0.5263
+[ADMM]  18/30 λ= 0.1805 | C@1d= 3 | minLinf=3.66e-03 | T=  0.79s | ARI=0.8163
+[ADMM]  19/30 λ= 0.2885 | C@1d= 3 | minLinf=7.95e-03 | T=  0.80s | ARI=0.8163
+[ADMM]  20/30 λ= 0.4609 | C@1d= 2 | minLinf=1.20e-02 | T=  0.84s | ARI=0.2941
+[ADMM]  21/30 λ= 0.7365 | C@1d= 5 | minLinf=1.64e-02 | T=  0.99s | ARI=0.0308
+[ADMM]  22/30 λ= 1.1768 | C@1d= 3 | minLinf=2.34e-02 | T=  1.00s | ARI=0.1818
+[ADMM]  23/30 λ= 1.8803 | C@1d= 5 | minLinf=1.15e-02 | T=  1.02s | ARI=0.1990
+[ADMM]  24/30 λ= 3.0044 | C@1d= 3 | minLinf=1.39e-02 | T=  0.85s | ARI=0.0481
+[ADMM]  25/30 λ= 4.8006 | C@1d= 5 | minLinf=2.10e-02 | T=  1.23s | ARI=0.0308
+[ADMM]  26/30 λ= 7.6706 | C@1d= 6 | minLinf=2.31e-02 | T=  0.77s | ARI=0.1474
+[ADMM]  27/30 λ=12.2565 | C@1d= 7 | minLinf=1.41e-02 | T=  1.19s | ARI=-0.0645
+[ADMM]  28/30 λ=19.5840 | C@1d= 6 | minLinf=1.39e-02 | T=  1.11s | ARI=-0.0421
+[ADMM]  29/30 λ=31.2921 | C@1d= 3 | minLinf=1.42e-02 | T=  1.01s | ARI=-0.0693
+[ADMM]  30/30 λ=50.0000 | C@1d= 6 | minLinf=2.38e-02 | T=  1.14s | ARI=0.1290
+[Save] Z_path -> outputs/alt_cpu_bestcycle_v1/Z_path_cycle3.npy  (shape=(30, 10, 16))
+[Save] Z_last -> outputs/alt_cpu_bestcycle_v1/Z_last_cycle3.npy
+[Save] U_last -> outputs/alt_cpu_bestcycle_v1/U_last_cycle3.npy
+[Alt] pick Z* from lambda idx=14 (ARI=1.0000)
+=== [Alt Cycle 3] Finetune NN with tether mu=1.0 ===
+[Train] it=  100 | val_mse=0.341772
+[Cycle 3] validation_mse = 0.341772
+[Cycle 3] New best validation MSE: 0.341772
+
+=== [Alt Cycle 4/5] ADMM ===
+[ADMM]   1/30 λ= 0.0000 | C@1d=10 | minLinf=2.42e-02 | T=  0.74s | ARI=0.0000
+[ADMM]   2/30 λ= 0.0001 | C@1d= 9 | minLinf=2.52e-02 | T=  0.63s | ARI=0.0552
+[ADMM]   3/30 λ= 0.0002 | C@1d= 8 | minLinf=2.53e-02 | T=  0.73s | ARI=0.1099
+[ADMM]   4/30 λ= 0.0003 | C@1d= 9 | minLinf=2.53e-02 | T=  0.98s | ARI=0.0552
+[ADMM]   5/30 λ= 0.0004 | C@1d= 9 | minLinf=2.54e-02 | T=  0.58s | ARI=0.0552
+[ADMM]   6/30 λ= 0.0007 | C@1d= 9 | minLinf=2.72e-02 | T=  0.66s | ARI=0.0552
+[ADMM]   7/30 λ= 0.0010 | C@1d= 9 | minLinf=2.75e-02 | T=  0.80s | ARI=0.0552
+[ADMM]   8/30 λ= 0.0017 | C@1d= 9 | minLinf=2.78e-02 | T=  0.83s | ARI=0.0552
+[ADMM]   9/30 λ= 0.0027 | C@1d= 9 | minLinf=2.82e-02 | T=  0.81s | ARI=0.0552
+[ADMM]  10/30 λ= 0.0042 | C@1d= 9 | minLinf=2.83e-02 | T=  1.16s | ARI=0.0552
+[ADMM]  11/30 λ= 0.0068 | C@1d=10 | minLinf=2.75e-02 | T=  1.17s | ARI=0.0000
+[ADMM]  12/30 λ= 0.0108 | C@1d= 8 | minLinf=2.68e-02 | T=  1.10s | ARI=0.1099
+[ADMM]  13/30 λ= 0.0173 | C@1d= 8 | minLinf=2.27e-02 | T=  0.80s | ARI=0.1099
+[ADMM]  14/30 λ= 0.0277 | C@1d= 5 | minLinf=7.00e-03 | T=  1.01s | ARI=0.4255
+[ADMM]  15/30 λ= 0.0443 | C@1d= 3 | minLinf=1.19e-03 | T=  0.69s | ARI=0.8163
+[ADMM]  16/30 λ= 0.0707 | C@1d= 2 | minLinf=3.29e-03 | T=  1.08s | ARI=1.0000
+[ADMM]  17/30 λ= 0.1130 | C@1d= 4 | minLinf=1.33e-03 | T=  0.87s | ARI=0.5263
+[ADMM]  18/30 λ= 0.1805 | C@1d= 6 | minLinf=4.18e-03 | T=  0.76s | ARI=0.3743
+[ADMM]  19/30 λ= 0.2885 | C@1d= 4 | minLinf=8.47e-03 | T=  0.77s | ARI=0.6250
+[ADMM]  20/30 λ= 0.4609 | C@1d= 7 | minLinf=1.18e-02 | T=  0.84s | ARI=0.1639
+[ADMM]  21/30 λ= 0.7365 | C@1d= 5 | minLinf=1.48e-02 | T=  0.73s | ARI=0.0426
+[ADMM]  22/30 λ= 1.1768 | C@1d= 8 | minLinf=1.92e-02 | T=  0.79s | ARI=0.0110
+[ADMM]  23/30 λ= 1.8803 | C@1d= 7 | minLinf=2.07e-02 | T=  0.78s | ARI=0.0217
+[ADMM]  24/30 λ= 3.0044 | C@1d= 7 | minLinf=2.33e-02 | T=  0.81s | ARI=0.1196
+[ADMM]  25/30 λ= 4.8006 | C@1d= 6 | minLinf=2.12e-02 | T=  0.89s | ARI=-0.0107
+[ADMM]  26/30 λ= 7.6706 | C@1d= 6 | minLinf=2.45e-02 | T=  1.01s | ARI=-0.0107
+[ADMM]  27/30 λ=12.2565 | C@1d= 7 | minLinf=2.45e-02 | T=  0.89s | ARI=0.3226
+[ADMM]  28/30 λ=19.5840 | C@1d= 7 | minLinf=1.92e-02 | T=  0.76s | ARI=0.3226
+[ADMM]  29/30 λ=31.2921 | C@1d= 6 | minLinf=1.94e-02 | T=  0.85s | ARI=-0.0421
+[ADMM]  30/30 λ=50.0000 | C@1d= 7 | minLinf=1.84e-02 | T=  0.84s | ARI=0.0323
+[Save] Z_path -> outputs/alt_cpu_bestcycle_v1/Z_path_cycle4.npy  (shape=(30, 10, 16))
+[Save] Z_last -> outputs/alt_cpu_bestcycle_v1/Z_last_cycle4.npy
+[Save] U_last -> outputs/alt_cpu_bestcycle_v1/U_last_cycle4.npy
+[Alt] pick Z* from lambda idx=15 (ARI=1.0000)
+=== [Alt Cycle 4] Finetune NN with tether mu=1.0 ===
+[Train] it=  100 | val_mse=0.355341
+[Cycle 4] validation_mse = 0.355341
+[Cycle 4] No improvement in validation MSE (count=1/1)
+[Early Stop] Stop alternating at cycle 4. Best cycle = 3, best validation MSE = 0.341772
+[Alt] Restored best model from cycle 3 with validation MSE 0.341772
+[Alt Summary] best_cycle = 3, best_validation_mse = 0.341772
+[Save] Z path -> outputs/alt_cpu_bestcycle_v1/Z_path_cycle1.npy | shape=(30, 10, 16)
+[Save] metrics -> outputs/alt_cpu_bestcycle_v1/path_metrics_cycle1.csv
+[Save] dendrogram -> outputs/alt_cpu_bestcycle_v1/dendrogram_cycle1.png
+[Save] Z path -> outputs/alt_cpu_bestcycle_v1/Z_path_cycle2.npy | shape=(30, 10, 16)
+[Save] metrics -> outputs/alt_cpu_bestcycle_v1/path_metrics_cycle2.csv
+[Save] dendrogram -> outputs/alt_cpu_bestcycle_v1/dendrogram_cycle2.png
+[Save] Z path -> outputs/alt_cpu_bestcycle_v1/Z_path_cycle3.npy | shape=(30, 10, 16)
+[Save] metrics -> outputs/alt_cpu_bestcycle_v1/path_metrics_cycle3.csv
+[Save] dendrogram -> outputs/alt_cpu_bestcycle_v1/dendrogram_cycle3.png
+[Save] Z path -> outputs/alt_cpu_bestcycle_v1/Z_path_cycle4.npy | shape=(30, 10, 16)
+[Save] metrics -> outputs/alt_cpu_bestcycle_v1/path_metrics_cycle4.csv
+[Save] dendrogram -> outputs/alt_cpu_bestcycle_v1/dendrogram_cycle4.png

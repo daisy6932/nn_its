@@ -1,0 +1,7 @@
+{
+  "mode": "alt",
+  "cycles": 4,
+  "outdir": "outputs/alt_cpu_bestcycle_v1",
+  "best_cycle": 3,
+  "best_val_mse": 0.3417723774909973
+}
