@@ -166,7 +166,8 @@ def main():
             X_test=X_test, A_test=A_test, y_test=y_test,
             lambda_values=lambda_values,
             args=args,
-            log_fn=log_fn
+            log_fn=log_fn,
+            outdir=outdir
         )
         save_cycle_artifacts(outdir, 0, lambda_values, cycle0_pack, args, log_fn)
 
@@ -188,7 +189,8 @@ def main():
 
             args=args,
 
-            log_fn=log_fn
+            log_fn=log_fn,
+            outdir=outdir
 
         )
 
@@ -215,6 +217,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
