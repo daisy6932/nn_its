@@ -81,6 +81,20 @@ def main():
         default=1,
         help="Number of decimals used to detect approximate fusion in metrics/dendrogram."
     )
+    # Week 10
+    parser.add_argument(
+        "--alt_early_patience",
+        type=int,
+        default=1,
+        help="Stop alternating if validation MSE does not improve for this many cycles."
+    )
+
+    parser.add_argument(
+        "--alt_early_min_delta",
+        type=float,
+        default=1e-4,
+        help="Minimum decrease in validation MSE required to count as an improvement."
+    )
 
     #
     args = parser.parse_args()
@@ -192,6 +206,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
