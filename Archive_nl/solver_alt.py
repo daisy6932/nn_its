@@ -139,6 +139,7 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
     # Week 10
     best_val_mse = float("inf") # best validation MSE so far
     best_cycle = None # number of the cycle (best)
+    best_state_dict = None
     no_improve_count = 0 # how many times without improving
 
     alt_early_patience = int(getattr(args, "alt_early_patience", 1)) # how many times allowed without improving
@@ -229,6 +230,10 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
         if improved:
             best_val_mse = val_mse
             best_cycle = cycle_id
+            best_state_dict = {
+                k: v.detach().cpu().clone()
+                for k, v in model.state_dict().items()
+            }
             no_improve_count = 0
             log_fn(
                 f"[Cycle {cycle_id}] New best validation MSE: "
@@ -260,13 +265,22 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
                 f"Best cycle = {best_cycle}, best validation MSE = {best_val_mse:.6f}"
             )
             break
-    
+    if best_state_dict is not None:
+        model.load_state_dict(best_state_dict)
+        log_fn(
+            f"[Alt] Restored best model from cycle {best_cycle} "
+            f"with validation MSE {best_val_mse:.6f}"
+        )
     if best_cycle is not None:
         log_fn(
             f"[Alt Summary] best_cycle = {best_cycle}, "
             f"best_validation_mse = {best_val_mse:.6f}"
         )
-    return all_cycles
+    return all_cycles, {
+        "best_cycle": best_cycle,
+        "best_val_mse": best_val_mse,
+    }
+
 
 
 
