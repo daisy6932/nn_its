@@ -175,8 +175,8 @@ def main():
 
 
     elif args.mode == "alt":
-
-        cycles = run_alternating(
+        # Week 10, add best cycle
+        cycles, alt_summary = run_alternating(
 
             model=model,
 
@@ -199,13 +199,23 @@ def main():
 
             save_cycle_artifacts(outdir, cid, lambda_values, pack, args, log_fn)
 
+        # Week 10
         with open(os.path.join(outdir, "summary.json"), "w") as f:
-
-            json.dump({"mode": "alt", "cycles": len(cycles), "outdir": outdir}, f, indent=2)
-
+            json.dump(
+                {
+                    "mode": "alt",
+                    "cycles": len(cycles),
+                    "outdir": outdir,
+                    "best_cycle": alt_summary["best_cycle"],
+                    "best_val_mse": alt_summary["best_val_mse"],
+                },
+                f,
+                indent=2
+            )
 
 if __name__ == "__main__":
     main()
+
 
 
 
