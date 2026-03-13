@@ -6,6 +6,32 @@ import torch
 from .trainer import train_supervised
 from .solver_admm import run_admm_path
 
+def _compute_validation_mse(model, X, A, y):
+    """
+    Compute treatment-indexed validation MSE:
+      1) extract backbone features H
+      2) compute mu_all = H @ beta^T
+      3) pick mu_all[i, A_i]
+      4) compare with y
+    """
+    device = model.output_layer.weight.device
+
+    with torch.no_grad():
+        model.eval()
+
+        X = X.to(device)
+        A = A.to(device=device, dtype=torch.long)
+        y = y.to(device)
+
+        H = model.extract_features(X)                     # [n, d_hidden]
+        beta = model.output_layer.weight                 # [M, d_hidden]
+        mu_all = H @ beta.T                              # [n, M]
+        mu_a = mu_all.gather(1, A.view(-1, 1)).squeeze(1)
+
+        mse = torch.mean((mu_a - y) ** 2).item()
+
+    return float(mse)
+
 
 def run_posthoc(model, X_train, A_train, y_train, X_test, A_test, y_test,
                 lambda_values, args, log_fn=print, outdir=None):
@@ -109,6 +135,14 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
     Z_init = None
     U_init = None
     all_cycles = []
+                      
+    # Week 10
+    best_val_mse = float("inf") # best validation MSE so far
+    best_cycle = None # number of the cycle (best)
+    no_improve_count = 0 # how many times without improving
+
+    alt_early_patience = int(getattr(args, "alt_early_patience", 1)) # how many times allowed without improving
+    alt_early_min_delta = float(getattr(args, "alt_early_min_delta", 1e-4)) # Only when the improvement exceeds this threshold is it considered improvement.
 
     save_dir = outdir
     if save_dir is not None:
@@ -185,6 +219,27 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
             tether_Z=Z_star,
             mu_tether=float(args.mu_tether)
         )
+        # Week 10
+        # validation MSE after this cycle
+        val_mse = _compute_validation_mse(model, X_test, A_test, y_test)
+        log_fn(f"[Cycle {cycle_id}] validation_mse = {val_mse:.6f}")
+
+        improved = (best_val_mse - val_mse) > alt_early_min_delta
+
+        if improved:
+            best_val_mse = val_mse
+            best_cycle = cycle_id
+            no_improve_count = 0
+            log_fn(
+                f"[Cycle {cycle_id}] New best validation MSE: "
+                f"{best_val_mse:.6f}"
+            )
+        else:
+            no_improve_count += 1
+            log_fn(
+                f"[Cycle {cycle_id}] No improvement in validation MSE "
+                f"(count={no_improve_count}/{alt_early_patience})"
+            )
 
         # warm start to next cycle
         Z_init = Z_final.detach()
@@ -195,9 +250,24 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
             "all_Z": all_Z,
             "admm_metrics": metrics,
             "picked_lambda_index": best_i,
+            "val_mse": val_mse, # Week 10
+            "best_val_mse_so_far": best_val_mse,
         })
 
+        if no_improve_count >= alt_early_patience:
+            log_fn(
+                f"[Early Stop] Stop alternating at cycle {cycle_id}. "
+                f"Best cycle = {best_cycle}, best validation MSE = {best_val_mse:.6f}"
+            )
+            break
+    
+    if best_cycle is not None:
+        log_fn(
+            f"[Alt Summary] best_cycle = {best_cycle}, "
+            f"best_validation_mse = {best_val_mse:.6f}"
+        )
     return all_cycles
+
 
 
 
