@@ -96,12 +96,17 @@ def run_posthoc(model, X_train, A_train, y_train, X_val, A_val, y_val, X_test, A
         save_tag="posthoc",
         save_last_ZU=True
     )
+    # Week 11
+    final_test_mse = _compute_validation_mse(model, X_test, A_test, y_test)
+    log_fn(f"[Posthoc Final] test_mse = {final_test_mse:.6f}")
+
 
     return {
         "cycle": 0,
         "all_Z": all_Z,
         "admm_metrics": metrics,
         "picked_lambda_index": None,
+        "final_test_mse": final_test_mse,
     }, Z_final, U_final
 
 
