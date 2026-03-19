@@ -74,6 +74,14 @@ def main():
         help="Synthetic data version: 1=linear, 2=weak nonlinear, 3=moderate, 4=strong"
     )
     # add data_version end
+    # Week 11 add validation set
+    parser.add_argument(
+        "--n_val",
+        type=int,
+        default=2000,
+        help="Validation set size."
+    )
+
     # Week 9
     parser.add_argument(
         "--round_decimals",
@@ -124,7 +132,15 @@ def main():
         args.seed_train,
         version=args.data_version
     )
-
+    # Week 11 add validation 
+    X_val, A_val, y_val, _ = generate_synthetic_data(
+        args.n_val,
+        args.n_features,
+        args.n_classes,
+        true_groups,
+        args.seed_train + 1,
+        version=args.data_version
+    )
    
     X_test, A_test, y_test, _ = generate_synthetic_data(
         args.n_test,
@@ -139,6 +155,11 @@ def main():
     A_train = A_train.to(device)
     y_train = y_train.to(device)
 
+    # add validation
+    X_val = X_val.to(device)
+    A_val = A_val.to(device)
+    y_val = y_val.to(device)
+    
     X_test = X_test.to(device)
     A_test = A_test.to(device)
     y_test = y_test.to(device)
@@ -163,6 +184,7 @@ def main():
         cycle0_pack, Z_final, U_final = run_posthoc(
             model=model,
             X_train=X_train, A_train=A_train, y_train=y_train,
+            X_val=X_val, A_val=A_val, y_val=y_val,
             X_test=X_test, A_test=A_test, y_test=y_test,
             lambda_values=lambda_values,
             args=args,
@@ -182,7 +204,7 @@ def main():
             model=model,
 
             X_train=X_train, A_train=A_train, y_train=y_train,
-
+            X_val=X_val, A_val=A_val, y_val=y_val,
             X_test=X_test, A_test=A_test,  y_test=y_test,
 
             lambda_values=lambda_values,
