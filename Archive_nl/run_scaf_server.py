@@ -232,6 +232,7 @@ def main():
                     "outdir": outdir,
                     "best_cycle": alt_summary["best_cycle"],
                     "best_val_mse": alt_summary["best_val_mse"],
+                    "final_test_mse": alt_summary["final_test_mse"],
                 },
                 f,
                 indent=2
