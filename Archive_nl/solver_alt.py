@@ -121,7 +121,7 @@ def run_alternating(model, X_train, A_train, y_train, X_val, A_val, y_val, X_tes
     train_supervised(
         model,
         X_train, A_train, y_train,
-        X_test,  A_test,  y_test,
+        X_val, A_val, y_val,
         epochs=int(args.train_epochs),
         lr=float(args.train_lr),
         wd=float(args.train_wd),
