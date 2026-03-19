@@ -33,7 +33,7 @@ def _compute_validation_mse(model, X, A, y):
     return float(mse)
 
 
-def run_posthoc(model, X_train, A_train, y_train, X_test, A_test, y_test,
+def run_posthoc(model, X_train, A_train, y_train, X_val, A_val, y_val, X_test, A_test, y_test,
                 lambda_values, args, log_fn=print, outdir=None):
     """
     posthoc (regression w/ treatment):
@@ -49,7 +49,7 @@ def run_posthoc(model, X_train, A_train, y_train, X_test, A_test, y_test,
     train_supervised(
         model,
         X_train, A_train, y_train,
-        X_test,  A_test,  y_test,
+        X_val, A_val, y_val,
         epochs=int(args.train_epochs),
         lr=float(args.train_lr),
         wd=float(args.train_wd),
@@ -105,7 +105,7 @@ def run_posthoc(model, X_train, A_train, y_train, X_test, A_test, y_test,
     }, Z_final, U_final
 
 
-def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
+def run_alternating(model, X_train, A_train, y_train, X_val, A_val, y_val, X_test, A_test, y_test,
                     lambda_values, args, log_fn=print, outdir=None):
     """
     alternating (regression w/ treatment):
@@ -210,7 +210,7 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
         train_supervised(
             model,
             X_train, A_train, y_train,
-            X_test,  A_test,  y_test,
+            X_val, A_val, y_val,
             epochs=int(args.alt_train_epochs),
             lr=float(args.train_lr),
             wd=float(args.train_wd),
@@ -222,7 +222,7 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
         )
         # Week 10
         # validation MSE after this cycle
-        val_mse = _compute_validation_mse(model, X_test, A_test, y_test)
+        val_mse = _compute_validation_mse(model, X_val, A_val, y_val)
         log_fn(f"[Cycle {cycle_id}] validation_mse = {val_mse:.6f}")
 
         improved = (best_val_mse - val_mse) > alt_early_min_delta
@@ -271,6 +271,9 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
             f"[Alt] Restored best model from cycle {best_cycle} "
             f"with validation MSE {best_val_mse:.6f}"
         )
+    final_test_mse = _compute_validation_mse(model, X_test, A_test, y_test)
+    log_fn(f"[Final] test_mse = {final_test_mse:.6f}")
+
     if best_cycle is not None:
         log_fn(
             f"[Alt Summary] best_cycle = {best_cycle}, "
@@ -279,6 +282,7 @@ def run_alternating(model, X_train, A_train, y_train, X_test, A_test, y_test,
     return all_cycles, {
         "best_cycle": best_cycle,
         "best_val_mse": best_val_mse,
+        "final_test_mse": final_test_mse,
     }
 
 
