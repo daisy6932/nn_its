@@ -1,0 +1,8 @@
+{
+  "mode": "alt",
+  "cycles": 8,
+  "outdir": "outputs/alt_cpu_v3_3split_c8",
+  "best_cycle": 8,
+  "best_val_mse": 0.5243521928787231,
+  "final_test_mse": 0.5274683237075806
+}
