@@ -71,7 +71,11 @@ def run_posthoc(model, X_train, A_train, y_train, X_val, A_val, y_val, X_test, A
     A_train = A_train.to(device=H_train.device, dtype=torch.long)
     y_train = y_train.to(H_train.device)
 
-
+    # week 11 add cycle 0 mse
+    cycle0_val_mse = _compute_validation_mse(model, X_val, A_val, y_val)
+    cycle0_test_mse = _compute_validation_mse(model, X_test, A_test, y_test)
+    log_fn(f"[Cycle 0] validation_mse = {cycle0_val_mse:.6f}")
+    log_fn(f"[Cycle 0] test_mse = {cycle0_test_mse:.6f}")
     # still meaningful if true groups are known (n_classes=10)
     true_group_labels = np.array([0]*5 + [1]*5) if int(args.n_classes) == 10 else None
 
@@ -106,6 +110,8 @@ def run_posthoc(model, X_train, A_train, y_train, X_val, A_val, y_val, X_test, A
         "all_Z": all_Z,
         "admm_metrics": metrics,
         "picked_lambda_index": None,
+        "cycle0_val_mse": cycle0_val_mse,
+        "cycle0_test_mse": cycle0_test_mse,
         "final_test_mse": final_test_mse,
     }, Z_final, U_final
 
@@ -134,7 +140,12 @@ def run_alternating(model, X_train, A_train, y_train, X_val, A_val, y_val, X_tes
         eval_every=int(args.eval_every),
         log_fn=log_fn
     )
-
+    # week 11 cycle 0 mse
+    cycle0_val_mse = _compute_validation_mse(model, X_val, A_val, y_val)
+    cycle0_test_mse = _compute_validation_mse(model, X_test, A_test, y_test)
+    log_fn(f"[Cycle 0] validation_mse = {cycle0_val_mse:.6f}")
+    log_fn(f"[Cycle 0] test_mse = {cycle0_test_mse:.6f}")
+                        
     true_group_labels = np.array([0]*5 + [1]*5) if int(args.n_classes) == 10 else None
 
     Z_init = None
@@ -278,13 +289,18 @@ def run_alternating(model, X_train, A_train, y_train, X_val, A_val, y_val, X_tes
         )
     final_test_mse = _compute_validation_mse(model, X_test, A_test, y_test)
     log_fn(f"[Final] test_mse = {final_test_mse:.6f}")
-
+    log_fn(
+        f"[Alt Summary] cycle0_val_mse = {cycle0_val_mse:.6f}, "
+        f"cycle0_test_mse = {cycle0_test_mse:.6f}"
+    )
     if best_cycle is not None:
         log_fn(
             f"[Alt Summary] best_cycle = {best_cycle}, "
             f"best_validation_mse = {best_val_mse:.6f}"
         )
     return all_cycles, {
+        "cycle0_val_mse": cycle0_val_mse,
+        "cycle0_test_mse": cycle0_test_mse,
         "best_cycle": best_cycle,
         "best_val_mse": best_val_mse,
         "final_test_mse": final_test_mse,
