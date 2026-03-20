@@ -194,8 +194,20 @@ def main():
         save_cycle_artifacts(outdir, 0, lambda_values, cycle0_pack, args, log_fn)
 
         # Week 11, add final test mse
+        #with open(os.path.join(outdir, "summary.json"), "w") as f:
+        #    json.dump({"mode": "posthoc", "outdir": outdir, "final_test_mse": cycle0_pack["final_test_mse"]}, f, indent=2)
         with open(os.path.join(outdir, "summary.json"), "w") as f:
-            json.dump({"mode": "posthoc", "outdir": outdir, "final_test_mse": cycle0_pack["final_test_mse"]}, f, indent=2)
+            json.dump(
+                {
+                    "mode": "posthoc",
+                    "outdir": outdir,
+                    "cycle0_val_mse": cycle0_pack["cycle0_val_mse"],
+                    "cycle0_test_mse": cycle0_pack["cycle0_test_mse"],
+                    "final_test_mse": cycle0_pack["final_test_mse"],
+                },
+                f,
+                indent=2
+            )
 
 
     elif args.mode == "alt":
@@ -231,6 +243,8 @@ def main():
                     "mode": "alt",
                     "cycles": len(cycles),
                     "outdir": outdir,
+                    "cycle0_val_mse": alt_summary["cycle0_val_mse"],
+                    "cycle0_test_mse": alt_summary["cycle0_test_mse"],
                     "best_cycle": alt_summary["best_cycle"],
                     "best_val_mse": alt_summary["best_val_mse"],
                     "final_test_mse": alt_summary["final_test_mse"],
